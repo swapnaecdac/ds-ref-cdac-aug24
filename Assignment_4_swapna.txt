@@ -1,0 +1,1134 @@
+1)  a) Create a database named college:
+create database college;
+use college;
+
+b) Create a table name student in college database with following structure
+ roll,name,class,marks,age with respective datatypes:
+
+create table student (
+    roll int,
+    name varchar(255),
+    class int,
+    marks float,
+    age  int
+);
+ c) Insert at least 5 rows in the table:
+
+INSERT INTO student (roll,name,class,marks,age)
+VALUES (1, 'Swapna',10,50,42);
+
+INSERT INTO student (roll,name,class,marks,age)
+VALUES (2, 'Laasya',7,65,12);
+
+INSERT INTO student (roll,name,class,marks,age)
+VALUES (3, 'Lahari',12,94,42);
+
+INSERT INTO student (roll,name,class,marks,age)
+VALUES (4, 'Eesha',4,90,42);
+
+INSERT INTO student (roll,name,class,marks,age)
+VALUES (5, 'Sri Laaya',8,80,42);
+
+d) Delete the entry of roll number 4
+
+DELETE FROM student WHERE roll = 4;
+
+e) Update the marks of roll number 3
+
+UPDATE student 
+SET marks = 96
+WHERE roll = 3;
+
+f) Give additional grace marks of 0.5 to all students.
+
+update student 
+set marks = marks + 0.5;
+
+g)Truncate the table
+TRUNCATE student;
+
+f)  Insert the data again using multi-insert statement:
+
+INSERT INTO student (roll,name,class,marks,age)
+VALUES
+  (1, 'Swapna',10,50,42),
+  (2, 'Laasya',7,65,12),
+  (3, 'Lahari',12,94,42),
+  (4, 'Eesha',4,90,42),
+  (5, 'Sri Laaya',8,80,42);
+===================================================
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.39 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database college
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create table student (
+    ->     roll int,
+    ->     name varchar(255),
+    ->     class int,
+    ->     marks float,
+    ->     age  int
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> use college;
+Database changed
+mysql> create table student (
+    ->     roll int,
+    ->     name varchar(255),
+    ->     class int,
+    ->     marks float,
+    ->     age  int
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (1, 'Swapna',7,50,42);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (1, 'Swapna',10,50,42);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (2, 'Laasya',7,65,12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (3, 'Lahari',12,94,42);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (4, 'Eesha',4,90,42);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (5, 'Sri Laaya',8,80,42);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> DELETE FROM student WHERE roll = 4;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> UPDATE student
+    -> SET marks = 96
+    -> WHERE roll = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student
+    -> set marks = marks + 0.5;
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> TRUNCATE student;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES
+    ->   (1, 'Swapna',10,50,42),
+    ->   (2, 'Laasya',7,65,12),
+    ->   (3, 'Lahari',12,94,42),
+    ->   (4, 'Eesha',4,90,42),
+    ->   (5, 'Sri Laaya',8,80,42);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+====================================================
+ 2. Apply the following MySQL clause to this table.
+ ◦ Creating, Altering, Dropping Constraints
+ ◦ Aggregate Functions: SUM(), AVG(), COUNT(), MAX(), MIN(), COUNT(), Group By, Having
+ Clause
+ ◦ Using Like, Distinct, Order By, Between...And
+ ◦ Comparing Nulls, Using IN/Not-In
+
+a) Creating, Altering, Dropping Constraints
+
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255) NOT NULL,
+    Age int
+);
+
+ALTER TABLE Persons
+MODIFY Age int NOT NULL;
+
+ALTER TABLE Persons
+ADD CONSTRAINT UC_Person UNIQUE (ID,LastName);
+
+ALTER TABLE Persons
+DROP INDEX UC_Person;
+
+b) Aggregate Functions: SUM(), AVG(), COUNT(), MAX(), MIN(), COUNT(), Group By, Having
+ Clause
+
+SELECT AVG(marks)
+FROM student;
+
+SELECT SUM(marks)
+FROM student;
+
+SELECT COUNT(roll)
+FROM student;
+
+SELECT MIN(marks) AS minmarks
+FROM student;
+
+SELECT MAX(marks) AS maxmarks
+FROM student;
+
+INSERT INTO student (roll,name,class,marks,age)
+VALUES
+  (6, 'xx',10,50,42),
+  (7, 'yy',7,65,12),
+  (8, 'zz',12,94,42),
+  (9, 'aa',4,90,42),
+  (10, 'bb',8,80,42);
+
+SELECT COUNT(*)
+FROM student
+GROUP BY marks;
+
+select class,avg(marks) from student group by class having
+avg(marks) > 70;
+
+c) Using Like, Distinct, Order By, Between...And
+
+SELECT * FROM student 
+WHERE name LIKE 'L%';
+
+SELECT * FROM student
+ORDER BY marks;
+
+SELECT * FROM student
+WHERE marks BETWEEN 70 AND 90;
+
+d)  Comparing Nulls, Using IN/Not-In
+
+SELECT * FROM student 
+WHERE marks IN (70, 80, 90);
+
+SELECT * FROM student 
+WHERE marks NOT IN (70, 80, 90)
+====Commandline output
+
+
+mysql> CREATE TABLE Persons (
+    ->     ID int NOT NULL,
+    ->     LastName varchar(255) NOT NULL,
+    ->     FirstName varchar(255) NOT NULL,
+    ->     Age int
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> ALTER TABLE Persons
+    -> MODIFY Age int NOT NULL;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Persons
+    -> ADD CONSTRAINT UC_Person UNIQUE (ID,LastName);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Persons
+    -> DROP INDEX UC_Person;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT AVG(marks)
+    -> FROM student;
++------------+
+| AVG(marks) |
++------------+
+|       75.8 |
++------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT SUM(marks)
+    -> FROM student;
++------------+
+| SUM(marks) |
++------------+
+|        379 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(roll)
+    -> FROM student;
++-------------+
+| COUNT(roll) |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(marks) AS minmarks
+    -> FROM student;
++----------+
+| minmarks |
++----------+
+|       50 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(marks) AS maxmarks
+    -> FROM student;
++----------+
+| maxmarks |
++----------+
+|       94 |
++----------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT name
+    -> FROM student
+    -> GROUP BY marks;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'college.student.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES
+    ->   (6, 'xx',10,50,42),
+    ->   (7, 'yy',7,65,12),
+    ->   (8, 'zz',12,94,42),
+    ->   (9, 'aa',4,90,42),
+    ->   (10, 'bb',8,80,42);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+mysql> SELECT COUNT(*)
+    -> FROM student
+    -> GROUP BY marks;
++----------+
+| COUNT(*) |
++----------+
+|        2 |
+|        2 |
+|        2 |
+|        2 |
+|        2 |
++----------+
+5 rows in set (0.02 sec)
+
+mysql> select class,avg(marks) from student group by class having
+    -> avg(marks) > 70
+    -> ;
++-------+------------+
+| class | avg(marks) |
++-------+------------+
+|    12 |         94 |
+|     4 |         90 |
+|     8 |         80 |
++-------+------------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT * FROM student
+    -> WHERE name LIKE 'L%';
++------+--------+-------+-------+------+
+| roll | name   | class | marks | age  |
++------+--------+-------+-------+------+
+|    2 | Laasya |     7 |    65 |   12 |
+|    3 | Lahari |    12 |    94 |   42 |
++------+--------+-------+-------+------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT * FROM student
+    -> ORDER BY marks;
++------+-----------+-------+-------+------+
+| roll | name      | class | marks | age  |
++------+-----------+-------+-------+------+
+|    1 | Swapna    |    10 |    50 |   42 |
+|    6 | xx        |    10 |    50 |   42 |
+|    2 | Laasya    |     7 |    65 |   12 |
+|    7 | yy        |     7 |    65 |   12 |
+|    5 | Sri Laaya |     8 |    80 |   42 |
+|   10 | bb        |     8 |    80 |   42 |
+|    4 | Eesha     |     4 |    90 |   42 |
+|    9 | aa        |     4 |    90 |   42 |
+|    3 | Lahari    |    12 |    94 |   42 |
+|    8 | zz        |    12 |    94 |   42 |
++------+-----------+-------+-------+------+
+10 rows in set (0.01 sec)
+
+mysql>
+mysql> SELECT * FROM student
+    -> WHERE marks BETWEEN 70 AND 90;
++------+-----------+-------+-------+------+
+| roll | name      | class | marks | age  |
++------+-----------+-------+-------+------+
+|    4 | Eesha     |     4 |    90 |   42 |
+|    5 | Sri Laaya |     8 |    80 |   42 |
+|    9 | aa        |     4 |    90 |   42 |
+|   10 | bb        |     8 |    80 |   42 |
++------+-----------+-------+-------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student
+    -> WHERE marks IN (70, 80, 90);
++------+-----------+-------+-------+------+
+| roll | name      | class | marks | age  |
++------+-----------+-------+-------+------+
+|    4 | Eesha     |     4 |    90 |   42 |
+|    5 | Sri Laaya |     8 |    80 |   42 |
+|    9 | aa        |     4 |    90 |   42 |
+|   10 | bb        |     8 |    80 |   42 |
++------+-----------+-------+-------+------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM student
+    -> WHERE marks NOT IN (70, 80, 90);
++------+--------+-------+-------+------+
+| roll | name   | class | marks | age  |
++------+--------+-------+-------+------+
+|    1 | Swapna |    10 |    50 |   42 |
+|    2 | Laasya |     7 |    65 |   12 |
+|    3 | Lahari |    12 |    94 |   42 |
+|    6 | xx     |    10 |    50 |   42 |
+|    7 | yy     |     7 |    65 |   12 |
+|    8 | zz     |    12 |    94 |   42 |
++------+--------+-------+-------+------+
+6 rows in set (0.01 sec)
+
+mysql>
+
+====ends
+
+3) create table employees(
+    Employee_id int,
+    First_name varchar(255),
+    Last_name varchar(255),
+    Salary  float,
+    Joining_date date,
+    Departement varchar(255)
+);
+
+INSERT INTO employees (Employee_id ,First_name,Last_name,Salary,Joining_date,Departement)
+VALUES
+ 
+ (1,'Bob', 'Kinto',1000000,'2019-01-20','Finance'),
+ (2,'Jerry','Kansxo',6000000,'2019-01-15','IT'),
+ (3,'Philip','Jose',8900000,'2019-02-05','Banking'),
+ (4,'John','Abraham',2000000,'2019-02-25','Insurance'),
+ (5,'Michael','Mathew',2200000,'2019-02-28','Finance'),
+ (6,'Alex','chreketo',4000000,'2019-05-10','IT'),
+ (7,'Yohan','Soso',1230000,'2019-06-20','Banking');
+
+a) Basic Queries:
+ • Q1: Retrieve the First_name and Last_name of all employees
+
+select First_name,Last_name from employees;
+
+b) • Q2: Find the total number of employees in the IT department
+
+select count(*) from employees where Departement='IT';
+
+c) Q3: List the details of employees who joined after 2019-02-01
+
+select * from employees where Joining_date > '2019-02-01';
+
+ Aggregation and Grouping:
+ • Q4: What is the average salary of employees in the Finance department?
+
+select AVG(Salary) from employees where Departement='Finance';
+
+ Q5: Find the maximum salary in the Banking department.
+
+select MAX(Salary) from employees where Departement='Banking';
+
+
+ • Q6: Calculate the total salary paid to employees in each department
+
+select Departement,SUM(Salary) from employees Group By Departement;
+
+ Filtering and Sorting:
+ • Q7: Retrieve the employee(s) with the highest salary.
+
+select * from employees where salary=(select Max(salary) from employees);
+
+ • Q8: List all employees with a salary greater than 3000000, ordered by Joining_date.
+
+select * from employees where salary>3000000 order by Joining_date;
+
+• Q9: Retrieve the details of employees whose Last_name starts with 'K'.
+
+select * from employees where Last_name like 'K%';
+
+Subqueries and Joins (if there are other tables):
+ • Q14: Find the second highest salary in the company.
+
+SELECT MAX(Salary) FROM employees WHERE Salary < (SELECT MAX(Salary) FROM employees);
+
+ • Q15: List employees who earn more than the average salary of the entire company
+
+ Updating and Deleting Records:
+ • Q16: Update the salary of employees in the Insurance department by a 10% increase.
+
+UPDATE employees
+SET salary = salary+ salary * 0.1
+WHERE Departement = 'Insurance';
+
+ • Q17: Delete records of employees who joined before 2019-02-01
+
+DELETE FROM employees WHERE Joining_date < '2019-02-01';
+
+====command line output starts
+
+
+mysql>  create table employees(
+    ->     Employee_id int,
+    ->     First_name varchar(255),
+    ->     Last_name varchar(255),
+    ->     Salary  float,
+    ->     Joining_date date,
+    ->     Departement varchar(255)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+
+mysql> INSERT INTO employees (Employee_id ,First_name,Last_name,Salary,Joining_date,Departement)
+    -> VALUES
+    ->
+    ->  (1,'Bob', 'Kinto',1000000,'2019-01-20','Finance'),
+    ->  (2,'Jerry','Kansxo',6000000,'2019-01-15','IT'),
+    ->  (3,'Philip','Jose',8900000,'2019-02-05','Banking'),
+    ->  (4,'John','Abraham',2000000,'2019-02-25','Insurance'),
+    ->  (5,'Michael','Mathew',2200000,'2019-02-28','Finance'),
+    ->  (6,'Alex','chreketo',4000000,'2019-05-10','IT'),
+    ->  (7,'Yohan','Soso',1230000,'2019-06-20','Banking');
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select First_name,Last_name from employees;
++------------+-----------+
+| First_name | Last_name |
++------------+-----------+
+| Bob        | Kinto     |
+| Jerry      | Kansxo    |
+| Philip     | Jose      |
+| John       | Abraham   |
+| Michael    | Mathew    |
+| Alex       | chreketo  |
+| Yohan      | Soso      |
++------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql>
+mysql> select count(DISTINCT Departement) from employees;
++-----------------------------+
+| count(DISTINCT Departement) |
++-----------------------------+
+|                           4 |
++-----------------------------+
+1 row in set (0.01 sec)
+
+mysql> select count(*) from employees where Departement='IT';
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select * from employees where Joining_date > '2019-02-01';
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
+|           4 | John       | Abraham   | 2000000 | 2019-02-25   | Insurance   |
+|           5 | Michael    | Mathew    | 2200000 | 2019-02-28   | Finance     |
+|           6 | Alex       | chreketo  | 4000000 | 2019-05-10   | IT          |
+|           7 | Yohan      | Soso      | 1230000 | 2019-06-20   | Banking     |
++-------------+------------+-----------+---------+--------------+-------------+
+5 rows in set (0.01 sec)
+
+mysql> select AVG(Salary) from employees where Departement='Finance';
++-------------+
+| AVG(Salary) |
++-------------+
+|     1600000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select MAX(Salary) from employees where Departement='Banking';
++-------------+
+| MAX(Salary) |
++-------------+
+|     8900000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select SUM(Salary) from employees Group By Departement;
++-------------+
+| SUM(Salary) |
++-------------+
+|     3200000 |
+|    10000000 |
+|    10130000 |
+|     2000000 |
++-------------+
+4 rows in set (0.01 sec)
+
+mysql>
+mysql> select Departement,SUM(Salary) from employees Group By Departement;
++-------------+-------------+
+| Departement | SUM(Salary) |
++-------------+-------------+
+| Finance     |     3200000 |
+| IT          |    10000000 |
+| Banking     |    10130000 |
+| Insurance   |     2000000 |
++-------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql>
+
+mysql> select * from employees where salary=(select Max(salary) from employees);
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
++-------------+------------+-----------+---------+--------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees where salary>3000000 order by Joining_date;
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           2 | Jerry      | Kansxo    | 6000000 | 2019-01-15   | IT          |
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
+|           6 | Alex       | chreketo  | 4000000 | 2019-05-10   | IT          |
++-------------+------------+-----------+---------+--------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employees where Last_name like 'K%';
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           1 | Bob        | Kinto     | 1000000 | 2019-01-20   | Finance     |
+|           2 | Jerry      | Kansxo    | 6000000 | 2019-01-15   | IT          |
++-------------+------------+-----------+---------+--------------+-------------+
+2 rows in set (0.00 sec)
+
+
+mysql>
+mysql> SELECT MAX(Salary) FROM employees WHERE Salary < (SELECT MAX(Salary) FROM employees);
++-------------+
+| MAX(Salary) |
++-------------+
+|     6000000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM employees WHERE Salary > (SELECT AVG(Salary) FROM employees);
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           2 | Jerry      | Kansxo    | 6000000 | 2019-01-15   | IT          |
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
+|           6 | Alex       | chreketo  | 4000000 | 2019-05-10   | IT          |
++-------------+------------+-----------+---------+--------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+mysql> UPDATE employees
+    -> SET salary = salary+ salary * 0.1
+    -> WHERE Departement = 'Insurance';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+mysql> DELETE FROM employees WHERE Joining_date < '2019-02-01';
+Query OK, 2 rows affected (0.02 sec)
+
+mysql>
+====ends
+
+==Whole Commandline output=====
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.39 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database college
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create table student (
+    ->     roll int,
+    ->     name varchar(255),
+    ->     class int,
+    ->     marks float,
+    ->     age  int
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> use college;
+Database changed
+mysql> create table student (
+    ->     roll int,
+    ->     name varchar(255),
+    ->     class int,
+    ->     marks float,
+    ->     age  int
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (1, 'Swapna',7,50,42);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (1, 'Swapna',10,50,42);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (2, 'Laasya',7,65,12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (3, 'Lahari',12,94,42);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (4, 'Eesha',4,90,42);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES (5, 'Sri Laaya',8,80,42);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> DELETE FROM student WHERE roll = 4;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> UPDATE student
+    -> SET marks = 96
+    -> WHERE roll = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student
+    -> set marks = marks + 0.5;
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> TRUNCATE student;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES
+    ->   (1, 'Swapna',10,50,42),
+    ->   (2, 'Laasya',7,65,12),
+    ->   (3, 'Lahari',12,94,42),
+    ->   (4, 'Eesha',4,90,42),
+    ->   (5, 'Sri Laaya',8,80,42);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Persons (
+    ->     ID int NOT NULL,
+    ->     LastName varchar(255) NOT NULL,
+    ->     FirstName varchar(255) NOT NULL,
+    ->     Age int
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> ALTER TABLE Persons
+    -> MODIFY Age int NOT NULL;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Persons
+    -> ADD CONSTRAINT UC_Person UNIQUE (ID,LastName);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Persons
+    -> DROP INDEX UC_Person;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT AVG(marks)
+    -> FROM student;
++------------+
+| AVG(marks) |
++------------+
+|       75.8 |
++------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT SUM(marks)
+    -> FROM student;
++------------+
+| SUM(marks) |
++------------+
+|        379 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(roll)
+    -> FROM student;
++-------------+
+| COUNT(roll) |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(marks) AS minmarks
+    -> FROM student;
++----------+
+| minmarks |
++----------+
+|       50 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(marks) AS maxmarks
+    -> FROM student;
++----------+
+| maxmarks |
++----------+
+|       94 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(roll), name
+    -> FROM student
+    -> GROUP BY marks;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'college.student.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT name
+    -> FROM student
+    -> GROUP BY marks;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'college.student.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> INSERT INTO student (roll,name,class,marks,age)
+    -> VALUES
+    ->   (6, 'xx',10,50,42),
+    ->   (7, 'yy',7,65,12),
+    ->   (8, 'zz',12,94,42),
+    ->   (9, 'aa',4,90,42),
+    ->   (10, 'bb',8,80,42);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT name
+    -> FROM student
+    -> GROUP BY marks;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'college.student.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT COUNT(roll),name
+    -> FROM student
+    -> GROUP BY marks;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'college.student.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT COUNT(*)
+    -> FROM student
+    -> GROUP BY marks;
++----------+
+| COUNT(*) |
++----------+
+|        2 |
+|        2 |
+|        2 |
+|        2 |
+|        2 |
++----------+
+5 rows in set (0.02 sec)
+
+mysql> select class,avg(marks) from student group by class having
+    -> avg(marks) > 70
+    -> ;
++-------+------------+
+| class | avg(marks) |
++-------+------------+
+|    12 |         94 |
+|     4 |         90 |
+|     8 |         80 |
++-------+------------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT * FROM student
+    -> WHERE name LIKE 'L%';
++------+--------+-------+-------+------+
+| roll | name   | class | marks | age  |
++------+--------+-------+-------+------+
+|    2 | Laasya |     7 |    65 |   12 |
+|    3 | Lahari |    12 |    94 |   42 |
++------+--------+-------+-------+------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT * FROM student
+    -> ORDER BY marks;
++------+-----------+-------+-------+------+
+| roll | name      | class | marks | age  |
++------+-----------+-------+-------+------+
+|    1 | Swapna    |    10 |    50 |   42 |
+|    6 | xx        |    10 |    50 |   42 |
+|    2 | Laasya    |     7 |    65 |   12 |
+|    7 | yy        |     7 |    65 |   12 |
+|    5 | Sri Laaya |     8 |    80 |   42 |
+|   10 | bb        |     8 |    80 |   42 |
+|    4 | Eesha     |     4 |    90 |   42 |
+|    9 | aa        |     4 |    90 |   42 |
+|    3 | Lahari    |    12 |    94 |   42 |
+|    8 | zz        |    12 |    94 |   42 |
++------+-----------+-------+-------+------+
+10 rows in set (0.01 sec)
+
+mysql>
+mysql> SELECT * FROM student
+    -> WHERE marks BETWEEN 70 AND 90;
++------+-----------+-------+-------+------+
+| roll | name      | class | marks | age  |
++------+-----------+-------+-------+------+
+|    4 | Eesha     |     4 |    90 |   42 |
+|    5 | Sri Laaya |     8 |    80 |   42 |
+|    9 | aa        |     4 |    90 |   42 |
+|   10 | bb        |     8 |    80 |   42 |
++------+-----------+-------+-------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student
+    -> WHERE marks IN (70, 80, 90);
++------+-----------+-------+-------+------+
+| roll | name      | class | marks | age  |
++------+-----------+-------+-------+------+
+|    4 | Eesha     |     4 |    90 |   42 |
+|    5 | Sri Laaya |     8 |    80 |   42 |
+|    9 | aa        |     4 |    90 |   42 |
+|   10 | bb        |     8 |    80 |   42 |
++------+-----------+-------+-------+------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM student
+    -> WHERE marks NOT IN (70, 80, 90);
++------+--------+-------+-------+------+
+| roll | name   | class | marks | age  |
++------+--------+-------+-------+------+
+|    1 | Swapna |    10 |    50 |   42 |
+|    2 | Laasya |     7 |    65 |   12 |
+|    3 | Lahari |    12 |    94 |   42 |
+|    6 | xx     |    10 |    50 |   42 |
+|    7 | yy     |     7 |    65 |   12 |
+|    8 | zz     |    12 |    94 |   42 |
++------+--------+-------+-------+------+
+6 rows in set (0.01 sec)
+
+mysql>  create table employees(
+    ->     Employee_id int,
+    ->     First_name varchar(255),
+    ->     Last_name varchar(255),
+    ->     Salary  float,
+    ->     Joining_date date,
+    ->     Departement varchar(255)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> use employees;
+ERROR 1049 (42000): Unknown database 'employees'
+mysql> INSERT INTO employees (Employee_id ,First_name,Last_name,Salary,Joining_date,Departement)
+    -> VALUES
+    ->
+    ->  (1,'Bob', 'Kinto',1000000,2019-01-20,'Finance'),
+    ->  (2,'Jerry','Kansxo',6000000,2019-01-15,'IT'),
+    ->  (3,'Philip','Jose',8900000,2019-02-05,'Banking'),
+    ->  (4,'John','Abraham',2000000,2019-02-25,'Insurance'),
+    ->  (5,'Michael','Mathew',2200000,2019-02-28,'Finance'),
+    ->  (6,'Alex','chreketo',4000000,2019-05-10,'IT'),
+    ->  (7,'Yohan','Soso',1230000,2019-06-20,'Banking');
+ERROR 1292 (22007): Incorrect date value: '1998' for column 'Joining_date' at row 1
+mysql> INSERT INTO employees (Employee_id ,First_name,Last_name,Salary,Joining_date,Departement)
+    -> VALUES
+    ->
+    ->  (1,'Bob', 'Kinto',1000000,'2019-01-20','Finance'),
+    ->  (2,'Jerry','Kansxo',6000000,'2019-01-15','IT'),
+    ->  (3,'Philip','Jose',8900000,'2019-02-05','Banking'),
+    ->  (4,'John','Abraham',2000000,'2019-02-25','Insurance'),
+    ->  (5,'Michael','Mathew',2200000,'2019-02-28','Finance'),
+    ->  (6,'Alex','chreketo',4000000,'2019-05-10','IT'),
+    ->  (7,'Yohan','Soso',1230000,'2019-06-20','Banking');
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select First_name,Last_name from employees;
++------------+-----------+
+| First_name | Last_name |
++------------+-----------+
+| Bob        | Kinto     |
+| Jerry      | Kansxo    |
+| Philip     | Jose      |
+| John       | Abraham   |
+| Michael    | Mathew    |
+| Alex       | chreketo  |
+| Yohan      | Soso      |
++------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql>
+mysql> select count(DISTINCT Departement) from employees;
++-----------------------------+
+| count(DISTINCT Departement) |
++-----------------------------+
+|                           4 |
++-----------------------------+
+1 row in set (0.01 sec)
+
+mysql> select count(*) from employees where Departement='IT';
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select * from employees where Joining_date > '2019-02-01';
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
+|           4 | John       | Abraham   | 2000000 | 2019-02-25   | Insurance   |
+|           5 | Michael    | Mathew    | 2200000 | 2019-02-28   | Finance     |
+|           6 | Alex       | chreketo  | 4000000 | 2019-05-10   | IT          |
+|           7 | Yohan      | Soso      | 1230000 | 2019-06-20   | Banking     |
++-------------+------------+-----------+---------+--------------+-------------+
+5 rows in set (0.01 sec)
+
+mysql> select AVG(Salary) from employees where Departement='Finance';
++-------------+
+| AVG(Salary) |
++-------------+
+|     1600000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select MAX(Salary) from employees where Departement='Banking';
++-------------+
+| MAX(Salary) |
++-------------+
+|     8900000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select SUM(Salary) from employees Group By Departement;
++-------------+
+| SUM(Salary) |
++-------------+
+|     3200000 |
+|    10000000 |
+|    10130000 |
+|     2000000 |
++-------------+
+4 rows in set (0.01 sec)
+
+mysql>
+mysql> select Departement,SUM(Salary) from employees Group By Departement;
++-------------+-------------+
+| Departement | SUM(Salary) |
++-------------+-------------+
+| Finance     |     3200000 |
+| IT          |    10000000 |
+| Banking     |    10130000 |
+| Insurance   |     2000000 |
++-------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql>
+mysql> select * from employees where Salary=MAX(Salary);
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select * from employees where salary=(select Max(salary) from employees);
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
++-------------+------------+-----------+---------+--------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees where salary>3000000 order by Joining_date;
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           2 | Jerry      | Kansxo    | 6000000 | 2019-01-15   | IT          |
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
+|           6 | Alex       | chreketo  | 4000000 | 2019-05-10   | IT          |
++-------------+------------+-----------+---------+--------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employees where Last_name like 'K%';
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           1 | Bob        | Kinto     | 1000000 | 2019-01-20   | Finance     |
+|           2 | Jerry      | Kansxo    | 6000000 | 2019-01-15   | IT          |
++-------------+------------+-----------+---------+--------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT MAX(SALARY) FROM Employee WHERE SALARY < (SELECT MAX(SALARY) FROM Employee);
+ERROR 1146 (42S02): Table 'college.employee' doesn't exist
+mysql>
+mysql> SELECT MAX(Salary) FROM employees WHERE Salary < (SELECT MAX(Salary) FROM employees);
++-------------+
+| MAX(Salary) |
++-------------+
+|     6000000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM employees WHERE Salary > (SELECT AVG(Salary) FROM employees);
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           2 | Jerry      | Kansxo    | 6000000 | 2019-01-15   | IT          |
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
+|           6 | Alex       | chreketo  | 4000000 | 2019-05-10   | IT          |
++-------------+------------+-----------+---------+--------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> UPDATE employees
+    -> SET salary = salary+ salary * 0.1
+    -> WHERE department = 'Insurance';
+ERROR 1054 (42S22): Unknown column 'department' in 'where clause'
+mysql> UPDATE employees
+    -> SET salary = salary+ salary * 0.1
+    -> WHERE Departement = 'Insurance';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+mysql> DELETE FROM employees WHERE Joining_date < '2019-02-01';
+Query OK, 2 rows affected (0.02 sec)
+
+mysql>
+
+==ends
+
+
+
